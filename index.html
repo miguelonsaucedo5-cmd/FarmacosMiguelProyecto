@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacología del Sistema Nervioso Autónomo</title>
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --sympathomimetic: #059669;
+            --parasympathomimetic: #7c3aed;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --border-color: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        header h1 {
+            color: var(--primary-dark);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #475569;
+            font-size: 1.1rem;
+        }
+
+        .main-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Galería de imágenes superiores */
+        .image-grid-top {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .image-grid-top {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Sección de Audio */
+        .audio-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .audio-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .audio-item {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .audio-item h3 {
+            font-size: 1rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        audio {
+            width: 100%;
+            height: 35px;
+        }
+
+        /* Galería de imágenes inferiores */
+        .image-grid-bottom {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .image-grid-bottom {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Tabla y detalles */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        tbody tr {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f5f9;
+            transform: scale(1.01);
+        }
+
+        tbody tr.active {
+            background-color: #e0f2fe !important;
+            border-left: 5px solid var(--primary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+
+        .badge.sympathomimetic {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge.parasympathomimetic {
+            background-color: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .detail-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+        }
+
+        .detail-placeholder {
+            color: #64748b;
+            text-align: center;
+            font-style: italic;
+            margin: auto;
+            padding: 3rem 0;
+        }
+
+        .drug-info h3 {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .drug-category {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-section {
+            margin-bottom: 1.2rem;
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-section h4 {
+            font-size: 0.85rem;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-section p {
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Farmacología del Sistema Nervioso Autónomo</h1>
+        <p>Herramienta interactiva de estudio clínico. Haz clic en cualquier fármaco para desplegar su información detallada.</p>
+    </header>
+
+    <div class="main-layout">
+        <!-- 3 Primeras Imágenes Ilustrativas -->
+        <div class="image-grid-top">
+            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80" alt="Laboratorio" class="banner-img">
+            <img src="https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=600&q=80" alt="Investigación médica" class="banner-img">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" alt="Estudio clínico" class="banner-img">
+        </div>
+
+        <!-- Sección de Audio Simplificada -->
+        <section class="card">
+            <h2>Audios</h2>
+            <div class="audio-grid">
+                <div class="audio-item">
+                    <h3>Pista 1</h3>
+                    <audio controls src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
+                </div>
+                <div class="audio-item">
+                    <h3>Pista 2</h3>
+                    <audio controls src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=relaxing-mountains-142278.mp3"></audio>
+                </div>
+                <div class="audio-item">
+                    <h3>Pista 3</h3>
+                    <audio controls src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1718ab41b.mp3?filename=relaxing-piano-10821.mp3"></audio>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabla Interactiva y Panel de Detalles -->
+        <div class="container">
+            <section class="card">
+                <h2>Fármacos Disponibles</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fármaco</th>
+                                <th>Clasificación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="drug-table-body">
+                            <!-- Generado dinámicamente con JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card detail-panel" id="detail-panel">
+                <div class="detail-placeholder">
+                    <p>Selecciona un fármaco de la tabla para visualizar su perfil farmacológico completo.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- 2 Imágenes Posteriores -->
+        <div class="image-grid-bottom">
+            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80" alt="Farmacología clínica" class="banner-img" style="height: 180px;">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80" alt="Medicina y ciencia" class="banner-img" style="height: 180px;">
+        </div>
+    </div>
+
+    <script>
+        const drugsData = [
+            {
+                id: 1,
+                name: "Adrenalina (Epinefrina)",
+                group: "Simpaticomimético (Agonista adrenérgico no selectivo)",
+                groupClass: "sympathomimetic",
+                mechanism: "Estimula de forma directa los receptores alfa-1, alfa-2, beta-1 y beta-2 adrenérgicos, provocando vasoconstricción generalizada, aumento de la frecuencia cardíaca y broncodilatación.",
+                adverse: "Taquicardia, arritmias cardíacas, hipertensión arterial severa, ansiedad y temblores.",
+                clinical: "Tratamiento de elección en el shock anafiláctico y paro cardiorrespiratorio."
+            },
+            {
+                id: 2,
+                name: "Salbutamol",
+                group: "Simpaticomimético (Agonista selectivo beta-2)",
+                groupClass: "sympathomimetic",
+                mechanism: "Actúa de manera selectiva sobre los receptores beta-2 en el músculo liso bronquial, estimulando la relajación de las vías respiratorias.",
+                adverse: "Temblor fino distal, taquicardia refleja, palpitaciones e hipocaliemia leve.",
+                clinical: "Alivio del broncoespasmo en crisis asmáticas agudas y EPOC."
+            },
+            {
+                id: 3,
+                name: "Pilocarpina",
+                group: "Parasimpaticomimético (Agonista colinérgico directo)",
+                groupClass: "parasympathomimetic",
+                mechanism: "Estimula directamente los receptores muscarínicos (M3) generando contracción del esfínter del iris (miosis) y secreción glandular.",
+                adverse: "Miosis intensa, dolor ciliar, visión borrosa, diaforesis y salivación profusa.",
+                clinical: "Manejo agudo de la presión intraocular en glaucoma y tratamiento de la xerostomía."
+            },
+            {
+                id: 4,
+                name: "Atropina",
+                group: "Parasimpaticolítico / Anticolinérgico",
+                groupClass: "parasympathomimetic",
+                mechanism: "Antagonista competitivo no selectivo de los receptores muscarínicos, bloqueando los efectos parasimpáticos en corazón y glándulas.",
+                adverse: "Boca seca, visión borrosa por midriasis, taquicardia, estreñimiento y retención urinaria.",
+                clinical: "Tratamiento de la bradicardia sinusal sintomática y reanimación cardiopulmonar."
+            },
+            {
+                id: 5,
+                name: "Propranolol",
+                group: "Simpaticolítico (Antagonista beta no selectivo)",
+                groupClass: "sympathomimetic",
+                mechanism: "Bloquea competitivamente los receptores beta-1 y beta-2, reduciendo el gasto cardíaco y la frecuencia cardíaca.",
+                adverse: "Broncoespasmo, bradicardia severa, fatiga, extremidades frías e hipoglucemia enmascarada.",
+                clinical: "Manejo de hipertensión arterial, cardiopatía isquémica y profilaxis de migraña."
+            }
+        ];
+
+        const tableBody = document.getElementById('drug-table-body');
+        const detailPanel = document.getElementById('detail-panel');
+
+        function renderTable() {
+            tableBody.innerHTML = '';
+            drugsData.forEach(drug => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${drug.name}</strong></td>
+                    <td><span class="badge ${drug.groupClass}">${drug.group.split(' ')[0]}</span></td>
+                `;
+                
+                row.addEventListener('click', () => {
+                    document.querySelectorAll('tbody tr').forEach(tr => tr.classList.remove('active'));
+                    row.classList.add('active');
+                    showDrugDetails(drug);
+                });
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        function showDrugDetails(drug) {
+            detailPanel.innerHTML = `
+                <div class="drug-info">
+                    <h3>${drug.name}</h3>
+                    <p class="drug-category">${drug.group}</p>
+                    
+                    <div class="info-section">
+                        <h4>Mecanismo de Acción</h4>
+                        <p>${drug.mechanism}</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h4>Efectos Adversos</h4>
+                        <p>${drug.adverse}</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h4>Aplicaciones Clínicas</h4>
+                        <p>${drug.clinical}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        renderTable();
+    </script>
+    <video controls width="300">
+       <source src="video proyecto.mp4">
+    </video>
+    
+    
+</body>
+</html>
